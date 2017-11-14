@@ -9,6 +9,7 @@ $(document).ready(function() {
   $("input[type=checkbox]").bind('change', toggleDone);
   updateCounters(); // Just add this line
   $("form").bind('submit', submitTodo);
+  $("#clean-up").bind('click', cleanUpDoneTodos);
 });
 
 function updateCounters() {
@@ -61,4 +62,9 @@ function createTodo(title) {
 
 function nextTodoId() {
   return $(".todo").length + 1;
+}
+function cleanUpDoneTodos(event) {
+  event.preventDefault();
+  $.when($(".completed").remove())
+    .then(updateCounters);
 }
